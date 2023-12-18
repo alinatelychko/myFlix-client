@@ -5,7 +5,7 @@ import { MovieView } from "../movie-view/movie-view";
 export const MainView = () => {
   const [movies, setMovies] = useState([
     {
-        _id: ObjectId('6561f7965e59451f55b4f73b'),
+        _id:'6561f7965e59451f55b4f73b',
         Title: 'Inception',
         Description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.',
         Genre: {
@@ -19,7 +19,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f7b15e59451f55b4f73c'),
+        _id:'6561f7b15e59451f55b4f73c',
         Title: 'Under The Shadow',
         Description: 'As a mother and daughter struggle to cope with the terrors of the post-revolution, war-torn Tehran of the 1980s, a mysterious evil begins to haunt their home.',
         Genre: {
@@ -33,7 +33,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f7ca5e59451f55b4f73d'),
+        _id:'6561f7ca5e59451f55b4f73d',
         Title: 'Carol',
         Description: 'Carol is a 2015 romantic period drama film directed by Todd Haynes. The screenplay by Phyllis Nagy is based on the 1952 romance novel The Price of Salt by Patricia Highsmith (republished as Carol in 1990). The film stars Cate Blanchett, Rooney Mara, Sarah Paulson, Jake Lacy, and Kyle Chandler. Set in New York City during the early 1950s, Carol tells the story of a forbidden affair between an aspiring female photographer and an older woman going through a difficult divorce.',
         Genre: {
@@ -47,7 +47,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f7e35e59451f55b4f73e'),
+        _id:'6561f7e35e59451f55b4f73e',
         Title: 'The Ritual',
         Description: 'The Ritual is a 2017 British horror film that follows four friends who take a hiking trip into a Swedish forest and encounter an ancient evil. The film is directed by David Bruckner and written by Joe Barton, who adapted the 2011 novel The Ritual by Adam Nevill. The film stars Rafe Spall, Arsher Ali, Robert James-Collier, and Sam Troughton.',
         Genre: {
@@ -61,7 +61,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f7f75e59451f55b4f73f'),
+        _id:'6561f7f75e59451f55b4f73f',
         Title: 'The Platform',
         Description: "The Platform (Spanish: El hoyo, transl. The Hole) is a 2019 Spanish social science fiction horror film directed by Galder Gaztelu-Urrutia.[2] The film is set in a large, tower-style 'Vertical Self-Management Center.' Its residents, who are switched every month between its many floors, are fed via a platform which, initially filled with food at the top floor, gradually descends through the towers levels, stopping for a fixed amount of time on each. The system inevitably leads to conflict, as the residents at the top levels get to eat as much as they can, with each level only getting the leftovers from the previous ones.",
         Genre: {
@@ -75,7 +75,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f80c5e59451f55b4f740'),
+        _id:'6561f80c5e59451f55b4f740',
         Title: 'The Family Stone',
         Description: 'American comedy-drama film written and directed by Thomas Bezucha. Produced by Michael London and distributed by 20th Century Fox, it stars an ensemble cast, including Diane Keaton, Craig T. Nelson, Dermot Mulroney, Sarah Jessica Parker, Luke Wilson, Claire Danes, Rachel McAdams, and Tyrone Giordano. The plot follows the Christmas holiday misadventures of the Stone family in a small New England town when the eldest son, played by Mulroney, brings his uptight girlfriend (played by Parker) home with the intention of proposing to her with a cherished heirloom ring. Overwhelmed by the hostile reception, she begs her sister to join her for emotional support, which triggers further complications.',
         Genre: {
@@ -89,7 +89,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f81e5e59451f55b4f741'),
+        _id:'6561f81e5e59451f55b4f741',
         Title: 'Titanic',
         Description: 'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.',
         Genre: {
@@ -103,7 +103,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f8305e59451f55b4f742'),
+        _id:'6561f8305e59451f55b4f742',
         Title: 'Avatar',
         Description: 'A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
         Genre: {
@@ -117,7 +117,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f8465e59451f55b4f743'),
+        _id: '6561f8465e59451f55b4f743',
         Title: 'The Creator',
         Description: 'Against the backdrop of a war between humans and robots with artificial intelligence, a former soldier finds the secret weapon, a robot in the form of a young child.',
         Genre: {
@@ -131,7 +131,7 @@ export const MainView = () => {
         }
       },
       {
-        _id: ObjectId('6561f8565e59451f55b4f744'),
+        _id:'6561f8565e59451f55b4f744',
         Title: 'Tenet',
         Description: 'Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real-time.',
         Genre: {
