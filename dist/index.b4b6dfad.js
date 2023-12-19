@@ -27181,7 +27181,7 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://movieapicf-30767e813dee.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.movie.map((movie)=>{
+            const moviesFromApi = data.map((movie)=>{
                 return {
                     _id: movie._id,
                     Title: movie.Title,
