@@ -19,7 +19,7 @@ export const SignupView = () => {
     };
 
 
-    fetch("https://movieapicf-30767e813dee.herokuapp.com/login", {
+    fetch("https://movieapicf-30767e813dee.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
