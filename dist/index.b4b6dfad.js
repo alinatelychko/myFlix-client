@@ -30774,7 +30774,7 @@ const SignupView = ()=>{
             Email: email,
             Birthday: birthday
         };
-        fetch("https://movieapicf-30767e813dee.herokuapp.com/users", {
+        fetch("https://movieapicf-30767e813dee.herokuapp.com/login", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
