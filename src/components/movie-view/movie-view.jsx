@@ -1,29 +1,62 @@
+import React from "react";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
-export const MovieView = ({ movie, onBackClick }) => {
+import PropTypes from "prop-types";
+
+export const MovieView = ({ movies, onFavoriteToggle }) => {
+  const { movieId } = useParams();
+  const decodedMovieId = decodeURIComponent(movieId);
+  const movie = movies.find((b) => b._id === decodedMovieId);
+
+  // If movie is not found, or if it's undefined, handle it accordingly
+  // if (!movie) {
+  //   return <div>Movie not found!</div>;
+  // }
+
+    // Debug logging
+  console.log("movieId:", movieId);
+  console.log("movies:", movies);
+  console.log("movie:", movie);
+
     return (
       <div>
         {/* <div>
-          <img src={movie._id} />
+          <img src={movie.image} />
         </div> */}
-        <div>
-          <span>Title: </span>
-          <span>{movie.Title}</span>
-        </div>
-        <div>
-          <span>Description: </span>
-          <span>{movie.Description}</span>
-        </div>
-        <div>
-          <span>Author: </span>
-          <span>{movie.Director.Name}</span>
-        </div>
-        <div>
-          <span>Genre: </span>
-          <span>{movie.Genre.Name}</span>
-        </div>
-        <Button onClick={onBackClick} variant="primary"  style={{ cursor: "pointer" }}>Back</Button>
+         <div>
+        <span>Title: </span>
+        <span>{movie.Title || "No Title"}</span>
+      </div>
+      <div>
+        <span>Description: </span>
+        <span>{movie.Description || "No Description"}</span>
+      </div>
+      <div>
+        <span>Director: </span>
+        <span>{movie.Director?.Name || "No Director"}</span>
+      </div>
+      <div>
+        <span>Genre: </span>
+        <span>{movie.Genre?.Name || "No Genre"}</span>
+      </div>
+
+        <Link to={`/`}>
+        <Button className="back-button" variant="primary"  style={{ cursor: "pointer" }}>Back</Button>
+      </Link>
+      <Button
+        variant="outline-primary"
+        style={{ cursor: "pointer" }}
+        onClick={() => onFavoriteToggle(movie._id)}
+      >
+        {movie.isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+      </Button>
       </div>
     );
   };
 
-  
+  MovieView.propTypes = {
+    movies: PropTypes.array.isRequired,              // Array of movie objects
+    onFavoriteToggle: PropTypes.func.isRequired,     // Function to toggle favorite status
+  };
