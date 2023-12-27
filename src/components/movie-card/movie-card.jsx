@@ -4,6 +4,8 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, onFavoriteToggle }) => {
+  const isFavorite = movie.isFavorite;
+
   return (
     <Card>
       <Card.Body>
@@ -30,9 +32,11 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
+    Description: PropTypes.string,
     Director: PropTypes.shape({
-      Name: PropTypes.string
-    })
+      Name: PropTypes.string,
+    }),
+    isFavorite: PropTypes.bool, // Add this line for the isFavorite prop
   }).isRequired,
   onFavoriteToggle: PropTypes.func.isRequired,
 };

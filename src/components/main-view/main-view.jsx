@@ -5,8 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-import { ProfileFavoritesView } from "../profile-favorites-view/profile-favorites-view";
-import Button from "react-bootstrap/Button";
+import  ProfileFavoritesView  from "../profile-favorites-view/profile-favorites-view";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -17,29 +16,33 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
   const [movies, setMovies] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
   // const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleFavoriteToggle = (movieId) => {
-    fetch(`https://movieapicf-30767e813dee.herokuapp.com/user/${user._id}/favorites/${movieId}`, {
-      method: 'POST',
+    const url = `https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}/movies/${movieId}`;
+  
+    // Check if the movie is already in favorites
+    const isFavorite = favoriteMovies.includes(movieId);
+  
+    // Use the appropriate method based on whether it's adding or removing
+    const method = isFavorite ? "DELETE" : "POST";
+  
+    fetch(url, {
+      method: method,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((response) => {
-        if (!response.ok) {
-          console.error(`Error toggling favorite for movie with ID ${movieId}. Status: ${response.status}`);
-          return response.json(); // Attempt to parse and log the response body
-        }
-        return response.json();
+      .then((response) => response.json())
+      .then((updatedUser) => {
+        setFavoriteMovies(updatedUser.FavoriteMovies || []);
       })
-      .then((data) => {
-        // Handle the data or log it for further inspection
-        console.log('Toggle favorite response:', data);
-        setFavoriteMovies(data.favoriteMovies);
-      })
-      .catch((error) => console.error(`Error toggling favorite for movie with ID ${movieId}:`, error));
+      .catch((error) => {
+        console.error(`Error toggling favorite for movie with ID ${movieId}:`, error);
+      });
   };
   
 
@@ -86,52 +89,6 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
       });
   }, [token]);
 
-
-  // return (
-  //   <Row >
-  //  { !user ? (
-  //     <Col md={5}>
-  //       <LoginView
-  //         onLoggedIn={(user, token) => {
-  //           setUser(user);
-  //           setToken(token);
-  //         }}
-  //       />
-  //       or
-  //       <SignupView />
-  //     </Col>
-  //     ) : selectedMovie ? (
-  //   <Col className="justify-content-md-center">
-  //     <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-  //   </Col>
-  // ) : movies.length === 0 ? (
-  //    <div>The list is empty!</div>
-  // ): (
-  //   <div>
-  //     <Button 
-  //     onClick={() => { 
-  //       setUser(null); 
-  //       setToken(null); 
-  //       localStorage.clear();
-  //       }}       
-  //       variant="outline-secondary">Logout</Button>
-
-  //     {movies.map((movie) => (
-  //      <Col className="mb-5" key={movie._id} md={3}>
-  //      <MovieCard
-  //         key={movie._id}
-  //         movie={movie}
-  //         onMovieClick={(newSelectedMovie) => {
-  //           setSelectedMovie(newSelectedMovie);
-  //         }}
-  //       />
-  //       </Col>
-  //     ))}
-  //   </div>
-   
-  // )}
-  // </Row>
-  // )}
 
 
   return (
@@ -222,15 +179,16 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
             />
           }
         />
-        <Route
-            path="/profile/favorites"
-            element={
-              <ProfileFavoritesView
-                user={user}
-                onFavoriteToggle={handleFavoriteToggle}
-              />
-            }
-          />
+       <Route
+  path="/profile/favorites"
+  element={
+    <ProfileFavoritesView
+      user={user}
+      onFavoriteToggle={handleFavoriteToggle}
+      token={token} // Make sure to pass the token prop
+    />
+  }
+/>
       </Routes>
       </Row>
     </BrowserRouter>
