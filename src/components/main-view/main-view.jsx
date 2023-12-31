@@ -21,6 +21,7 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
   // const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleFavoriteToggle = (movieId) => {
+
     const url = `https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}/movies/${movieId}`;
   
     // Check if the movie is already in favorites
@@ -38,6 +39,12 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
     })
       .then((response) => response.json())
       .then((updatedUser) => {
+
+        // floop through updatedUser.FavoriteMovies
+        // and find the coreponding movies entry and set the movie.isFavorite variable
+        // for (favmovie in updtedUser.FavoriteMovies) 
+        // find favmovie in movies
+
         setFavoriteMovies(updatedUser.FavoriteMovies || []);
       })
       .catch((error) => {

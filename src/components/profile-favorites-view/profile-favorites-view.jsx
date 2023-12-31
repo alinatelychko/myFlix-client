@@ -4,17 +4,40 @@ import PropTypes from "prop-types";
 
 const ProfileFavoritesView = ({ user, token }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+    fetch("https://movieapicf-30767e813dee.herokuapp.com/movies", {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const moviesFromApi = data.map((movie) => {
+          return {
+            _id: movie._id,
+            Title: movie.Title,
+            Description: movie.Description,
+            Genre: {
+                Name: movie.Genre.Name
+            },
+            Director: {
+                Name: movie.Director.Name
+            }
+          };
+        });
+
+        setMovies(moviesFromApi);
+      });
+
     // Fetch the user's favorite movies
-    fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}/favorites`, {
+    fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        setFavoriteMovies(data.favoriteMovies);
+        setFavoriteMovies(data.FavoriteMovies);
       })
       .catch((error) => {
         console.error("Error fetching favorite movies:", error);
@@ -39,7 +62,7 @@ const ProfileFavoritesView = ({ user, token }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setFavoriteMovies(data.favoriteMovies);
+        setFavoriteMovies(data.FavoriteMovies);
       })
       .catch((error) => {
         console.error(`Error toggling favorite for movie with ID ${movieId}:`, error);
@@ -50,19 +73,22 @@ const ProfileFavoritesView = ({ user, token }) => {
     <div>
       <h2>Favorite Movies</h2>
       {favoriteMovies.length === 0 ? (
-        <p>No favorite movies yet.</p>
+        <p> No favorite movies yet.</p>
       ) : (
         <div>
-          {favoriteMovies.map((movie) => (
+          {movies.map((movie) => (
+            favoriteMovies.some((moviex) => moviex === movie._id)?
             <Card key={movie._id} style={{ width: "18rem", marginBottom: "15px" }}>
               <Card.Body>
+                
                 <Card.Title>{movie.Title}</Card.Title>
                 <Card.Text>{movie.Description}</Card.Text>
                 <Button variant="primary" onClick={() => handleToggle(movie._id)}>
                   {movie.isFavorite ? "Remove from Favorites" : "Add to Favorites"}
                 </Button>
               </Card.Body>
-            </Card>
+            
+            </Card> : <span> </span>
           ))}
         </div>
       )}

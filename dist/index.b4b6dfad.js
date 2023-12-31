@@ -41771,14 +41771,35 @@ var _s = $RefreshSig$();
 const ProfileFavoritesView = ({ user, token })=>{
     _s();
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
-        // Fetch the user's favorite movies
-        fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}/favorites`, {
+        fetch("https://movieapicf-30767e813dee.herokuapp.com/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>response.json()).then((data)=>{
-            setFavoriteMovies(data.favoriteMovies);
+            const moviesFromApi = data.map((movie)=>{
+                return {
+                    _id: movie._id,
+                    Title: movie.Title,
+                    Description: movie.Description,
+                    Genre: {
+                        Name: movie.Genre.Name
+                    },
+                    Director: {
+                        Name: movie.Director.Name
+                    }
+                };
+            });
+            setMovies(moviesFromApi);
+        });
+        // Fetch the user's favorite movies
+        fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((data)=>{
+            setFavoriteMovies(data.FavoriteMovies);
         }).catch((error)=>{
             console.error("Error fetching favorite movies:", error);
         });
@@ -41799,7 +41820,7 @@ const ProfileFavoritesView = ({ user, token })=>{
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>response.json()).then((data)=>{
-            setFavoriteMovies(data.favoriteMovies);
+            setFavoriteMovies(data.FavoriteMovies);
         }).catch((error)=>{
             console.error(`Error toggling favorite for movie with ID ${movieId}:`, error);
         });
@@ -41810,17 +41831,17 @@ const ProfileFavoritesView = ({ user, token })=>{
                 children: "Favorite Movies"
             }, void 0, false, {
                 fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                lineNumber: 51,
+                lineNumber: 74,
                 columnNumber: 7
             }, undefined),
             favoriteMovies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                children: "No favorite movies yet."
+                children: " No favorite movies yet."
             }, void 0, false, {
                 fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                lineNumber: 53,
+                lineNumber: 76,
                 columnNumber: 9
             }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
+                children: movies.map((movie)=>favoriteMovies.some((moviex)=>moviex === movie._id) ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
                         style: {
                             width: "18rem",
                             marginBottom: "15px"
@@ -41831,14 +41852,14 @@ const ProfileFavoritesView = ({ user, token })=>{
                                     children: movie.Title
                                 }, void 0, false, {
                                     fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                                    lineNumber: 59,
+                                    lineNumber: 84,
                                     columnNumber: 17
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                                     children: movie.Description
                                 }, void 0, false, {
                                     fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                                    lineNumber: 60,
+                                    lineNumber: 85,
                                     columnNumber: 17
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -41847,33 +41868,39 @@ const ProfileFavoritesView = ({ user, token })=>{
                                     children: movie.isFavorite ? "Remove from Favorites" : "Add to Favorites"
                                 }, void 0, false, {
                                     fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                                    lineNumber: 61,
+                                    lineNumber: 86,
                                     columnNumber: 17
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                            lineNumber: 58,
+                            lineNumber: 82,
                             columnNumber: 15
                         }, undefined)
                     }, movie._id, false, {
                         fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                        lineNumber: 57,
+                        lineNumber: 81,
                         columnNumber: 13
+                    }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: " "
+                    }, void 0, false, {
+                        fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
+                        lineNumber: 91,
+                        columnNumber: 23
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-                lineNumber: 55,
+                lineNumber: 78,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-favorites-view/profile-favorites-view.jsx",
-        lineNumber: 50,
+        lineNumber: 73,
         columnNumber: 5
     }, undefined);
 };
-_s(ProfileFavoritesView, "sByoVp6aBrOVoky4xmNCPrRmJmg=");
+_s(ProfileFavoritesView, "o9VghgX5FORrdqz5afsZ5cvxZPw=");
 _c = ProfileFavoritesView;
 ProfileFavoritesView.propTypes = {
     user: (0, _propTypesDefault.default).shape({
