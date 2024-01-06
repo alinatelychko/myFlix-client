@@ -18,6 +18,13 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
   const [movies, setMovies] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
+
+  useEffect(() => {
+    if (user) {
+      setFavoriteMovies(user.FavoriteMovies || []);
+    }
+  }, [user]);
+
   // const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleFavoriteToggle = (movieId) => {
@@ -26,6 +33,7 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
   
     // Check if the movie is already in favorites
     const isFavorite = favoriteMovies.includes(movieId);
+
   
     // Use the appropriate method based on whether it's adding or removing
     const method = isFavorite ? "DELETE" : "POST";
@@ -39,11 +47,6 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
     })
       .then((response) => response.json())
       .then((updatedUser) => {
-
-        // floop through updatedUser.FavoriteMovies
-        // and find the coreponding movies entry and set the movie.isFavorite variable
-        // for (favmovie in updtedUser.FavoriteMovies) 
-        // find favmovie in movies
 
         setFavoriteMovies(updatedUser.FavoriteMovies || []);
       })
@@ -168,7 +171,15 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
                   <>
                     {movies.map((movie) => (
                      <Col className="mb-4" key={movie._id} md={3}>
-                     <MovieCard movie={movie} onFavoriteToggle={handleFavoriteToggle} />
+                     <MovieCard
+                                                movie={movie}
+                                                onFavoriteToggle={
+                                                    handleFavoriteToggle
+                                                }
+                                                favoriteMovies={
+                                                    favoriteMovies
+                                                }
+                                            />
                    </Col>
                     ))}
                   </>

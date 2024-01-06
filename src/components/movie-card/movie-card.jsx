@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const MovieCard = ({ movie, onFavoriteToggle }) => {
+export const MovieCard = ({ movie, onFavoriteToggle, favoriteMovies }) => {
   const isFavorite = movie.isFavorite;
 
   return (
@@ -20,7 +20,10 @@ export const MovieCard = ({ movie, onFavoriteToggle }) => {
           style={{ cursor: "pointer" }}
           onClick={() => onFavoriteToggle(movie._id)}
         >
-          {movie.isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+         {favoriteMovies.includes(movie._id)
+                    ? "Remove from Favorites"
+                    : "Add to Favorites"}
+
         </Button>
       </Card.Body>
     </Card>

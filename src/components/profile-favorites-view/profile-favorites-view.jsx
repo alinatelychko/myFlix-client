@@ -7,8 +7,23 @@ const ProfileFavoritesView = ({ user, token }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+    // Fetch the user's favorite movies
+    fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFavoriteMovies(data.FavoriteMovies || []); // Ensure it is an array
+      })
+      .catch((error) => {
+        console.error("Error fetching favorite movies:", error);
+      });
+
+    // Fetch all movies
     fetch("https://movieapicf-30767e813dee.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -18,37 +33,26 @@ const ProfileFavoritesView = ({ user, token }) => {
             Title: movie.Title,
             Description: movie.Description,
             Genre: {
-                Name: movie.Genre.Name
+              Name: movie.Genre.Name,
             },
             Director: {
-                Name: movie.Director.Name
-            }
+              Name: movie.Director.Name,
+            },
           };
         });
 
         setMovies(moviesFromApi);
-      });
-
-    // Fetch the user's favorite movies
-    fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setFavoriteMovies(data.FavoriteMovies);
       })
       .catch((error) => {
-        console.error("Error fetching favorite movies:", error);
+        console.error("Error fetching movies:", error);
       });
-  }, [user, token]);
+  }, [user.Username, token]);
 
   const handleToggle = (movieId) => {
     const url = `https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}/movies/${movieId}`;
 
     // Determine if the movie is already in favorites
-    const isFavorite = favoriteMovies.some((movie) => movie._id === movieId);
+    const isFavorite = favoriteMovies.some((movie) => movie === movieId);
 
     // Use the appropriate method based on whether it's adding or removing
     const method = isFavorite ? "DELETE" : "POST";
@@ -62,33 +66,33 @@ const ProfileFavoritesView = ({ user, token }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setFavoriteMovies(data.FavoriteMovies);
+        setFavoriteMovies(data.FavoriteMovies || []);
       })
       .catch((error) => {
         console.error(`Error toggling favorite for movie with ID ${movieId}:`, error);
       });
   };
 
+  // Filter movies to display only favorites
+  const favoriteMoviesToShow = movies.filter((movie) => favoriteMovies.includes(movie._id));
+
   return (
     <div>
       <h2>Favorite Movies</h2>
-      {favoriteMovies.length === 0 ? (
-        <p> No favorite movies yet.</p>
+      {favoriteMoviesToShow.length === 0 ? (
+        <p>No favorite movies yet.</p>
       ) : (
         <div>
-          {movies.map((movie) => (
-            favoriteMovies.some((moviex) => moviex === movie._id)?
+          {favoriteMoviesToShow.map((movie) => (
             <Card key={movie._id} style={{ width: "18rem", marginBottom: "15px" }}>
               <Card.Body>
-                
                 <Card.Title>{movie.Title}</Card.Title>
                 <Card.Text>{movie.Description}</Card.Text>
                 <Button variant="primary" onClick={() => handleToggle(movie._id)}>
-                  {movie.isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                  Remove from Favorites
                 </Button>
               </Card.Body>
-            
-            </Card> : <span> </span>
+            </Card>
           ))}
         </div>
       )}
