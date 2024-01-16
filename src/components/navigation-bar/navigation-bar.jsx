@@ -7,7 +7,7 @@ const NavigationBar = ({ user, onLoggedOut }) => {
 
   const handleSearch = async (query) => {
     try {
-      const response = await fetch('https://movieapicf-30767e813dee.herokuapp.com/movies', {
+      const response = await fetch('https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}', {
         headers: {
           Authorization: `Bearer ${token}`, // Include your authentication token if needed
         },

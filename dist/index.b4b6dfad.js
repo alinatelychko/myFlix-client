@@ -27280,7 +27280,7 @@ const MainView = ({ onUserUpdate, onDeregister })=>{
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 106,
-                columnNumber: 6
+                columnNumber: 5
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
                 className: "justify-content-md-center",
@@ -27531,7 +27531,8 @@ const MovieCard = ({ movie, onFavoriteToggle, favoriteMovies })=>{
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                         variant: "primary",
                         style: {
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            marginRight: 10
                         },
                         children: " Open "
                     }, void 0, false, {
@@ -41740,7 +41741,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
     const [searchQuery, setSearchQuery] = (0, _react.useState)("");
     const handleSearch = async (query)=>{
         try {
-            const response = await fetch("https://movieapicf-30767e813dee.herokuapp.com/movies", {
+            const response = await fetch("https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
