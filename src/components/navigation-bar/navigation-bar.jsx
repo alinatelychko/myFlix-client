@@ -7,6 +7,7 @@ const NavigationBar = ({ user, onLoggedOut }) => {
 
   const handleSearch = async (query, token) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch('https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}', {
         headers: {
           Authorization: `Bearer ${token}`, // Include your authentication token if needed

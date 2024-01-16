@@ -103,13 +103,13 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
 
   return (
     <BrowserRouter>
-    <NavigationBar
-  user={user}
-  onLoggedOut={() => {
-    setUser(null);
-  }}
-  token={token}
-/>
+   <NavigationBar
+        user={user}
+        onLoggedOut={() => {
+          setUser(null);
+        }}
+        token={token}  // 'token' prop to NavigationBar
+      />
 
       <Row className="justify-content-md-center">
         <Routes>
