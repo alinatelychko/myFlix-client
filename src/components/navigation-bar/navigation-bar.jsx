@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const NavigationBar = ({ user, onLoggedOut }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = async (query) => {
+  const handleSearch = async (query, token) => {
     try {
       const response = await fetch('https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}', {
         headers: {
@@ -57,7 +57,7 @@ const NavigationBar = ({ user, onLoggedOut }) => {
               </>
             )}
           </Nav>
-          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery); }}>
+          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery, token); }}>
             <Form.Control
               type="search"
               placeholder="Search"

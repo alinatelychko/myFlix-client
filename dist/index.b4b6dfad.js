@@ -41739,11 +41739,11 @@ var _s = $RefreshSig$();
 const NavigationBar = ({ user, onLoggedOut })=>{
     _s();
     const [searchQuery, setSearchQuery] = (0, _react.useState)("");
-    const handleSearch = async (query)=>{
+    const handleSearch = async (query, token1)=>{
         try {
             const response = await fetch("https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}", {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token1}`
                 }
             });
             if (!response.ok) throw new Error("Search failed");
@@ -41844,7 +41844,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                             className: "d-flex",
                             onSubmit: (e)=>{
                                 e.preventDefault();
-                                handleSearch(searchQuery);
+                                handleSearch(searchQuery, token);
                             },
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
