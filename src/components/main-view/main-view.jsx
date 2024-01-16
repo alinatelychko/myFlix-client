@@ -108,6 +108,8 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
         onLoggedOut={() => {
           setUser(null);
         }}
+        token={token} 
+
       />
       <Row className="justify-content-md-center">
         <Routes>
