@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { Navbar, Container, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const NavigationBar = ({ user, onLoggedOut }) => {
+const NavigationBar = ({ user, onLoggedOut, token }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = async (query, token) => {
     try {
-      const token = localStorage.getItem("token");
       const response = await fetch('https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}', {
         headers: {
           Authorization: `Bearer ${token}`, // Include your authentication token if needed
@@ -19,7 +18,7 @@ const NavigationBar = ({ user, onLoggedOut }) => {
       }
 
       const searchData = await response.json();
-      // Update state with search results or perform other actions
+      
       console.log('Search results:', searchData);
     } catch (error) {
       console.error('Error during search:', error);
@@ -58,7 +57,7 @@ const NavigationBar = ({ user, onLoggedOut }) => {
               </>
             )}
           </Nav>
-          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery, token); }}>
+          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery); }}>
             <Form.Control
               type="search"
               placeholder="Search"
