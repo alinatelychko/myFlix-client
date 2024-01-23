@@ -10,7 +10,7 @@ export const MovieCard = ({ movie, onFavoriteToggle, favoriteMovies }) => {
     <Card>
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
+        <Card.Text>{movie.Description.substring(0, 80)}...</Card.Text>
         <Card.Text>{movie.Director.Name}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
           <Button variant="primary" style={{ cursor: "pointer", marginRight: 10 }}> Open </Button>
@@ -21,7 +21,7 @@ export const MovieCard = ({ movie, onFavoriteToggle, favoriteMovies }) => {
           onClick={() => onFavoriteToggle(movie._id)}
         >
          {favoriteMovies.includes(movie._id)
-                    ? "Remove from Favorites"
+                    ? "Remove  Favorite"
                     : "Add to Favorites"}
 
         </Button>

@@ -3,28 +3,8 @@ import { Navbar, Container, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const NavigationBar = ({ user, onLoggedOut, token }) => {
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = async (query, token) => {
-    try {
-      const response = await fetch('https://movieapicf-30767e813dee.herokuapp.com/movies?Title=${query}', {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include your authentication token if needed
-        },
-      });
 
-      if (!response.ok) {
-        throw new Error('Search failed');
-      }
-
-      const searchData = await response.json();
-      
-      console.log('Search results:', searchData);
-    } catch (error) {
-      console.error('Error during search:', error);
-      // Handle error
-    }
-  };
 
   return (
     <Navbar bg="light" expand="lg">
@@ -57,18 +37,7 @@ const NavigationBar = ({ user, onLoggedOut, token }) => {
               </>
             )}
           </Nav>
-          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery); }}>
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button type="submit" variant="outline-success">
-              Search
-            </Button>
-          </Form>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

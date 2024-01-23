@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -9,6 +9,7 @@ import  ProfileFavoritesView  from "../profile-favorites-view/profile-favorites-
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {Button, Form} from "react-bootstrap";
 
 export const MainView = ({ onUserUpdate, onDeregister})  => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -17,7 +18,8 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
   const [token, setToken] = useState(storedToken? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [moviesBeforeSearch, setMoviesBeforeSearch] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -96,8 +98,18 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
         });
 
         setMovies(moviesFromApi);
+          setMoviesBeforeSearch(moviesFromApi);
       });
   }, [token]);
+
+
+    const handleSearch = async (query, token) => {
+        // search moviesBeforeSearch for query for similiarity on title and set the filtered movies to movies
+        const filteredMovies = moviesBeforeSearch.filter((movie) => {
+            return movie.Title.toLowerCase().includes(query.toLowerCase());
+        });
+        setMovies(filteredMovies);
+    };
 
 
 
@@ -106,8 +118,11 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
    <NavigationBar
         user={user}
         onLoggedOut={() => {
-          setUser(null);
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.open('/', '_self');
         }}
+
         token={token}  // 'token' prop to NavigationBar
       />
 
@@ -165,15 +180,39 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
             path="/"
             element={
               <>
+
+                  <Row className="mb-4 mt-2">
+                      <Col ></Col>
+                      <Col ></Col>
+                      <Col>
+                          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery); }}>
+                              <Form.Control
+                                  type="search"
+                                  placeholder="Search"
+                                  className="me-2"
+                                  aria-label="Search"
+                                  onChange={(e) => setSearchQuery(e.target.value)}
+                              />
+                              <Button type="submit" variant="outline-success">
+                                  Search
+                              </Button>
+                          </Form>
+                      </Col>
+                  </Row>
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
+
+
+
+<Row>
                     {movies.map((movie) => (
-                     <Col className="mb-4" key={movie._id} md={3}>
+                     <Col className="mb-4"  key={movie._id} md={3}>
                      <MovieCard
+
                                                 movie={movie}
                                                 onFavoriteToggle={
                                                     handleFavoriteToggle
@@ -184,6 +223,7 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
                                             />
                    </Col>
                     ))}
+</Row>
                   </>
                 )}
               </>
