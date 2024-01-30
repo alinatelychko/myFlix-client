@@ -1,6 +1,18 @@
+
+
 import React, { useState } from 'react';
 import { Navbar, Container, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+/**
+ * React component for the navigation bar.
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.user - The user object.
+ * @param {Function} props.onLoggedOut - Callback function triggered on logout.
+ * @param {string} props.token - The authentication token.
+ * @returns {JSX.Element} The NavigationBar component.
+ */
 
 const NavigationBar = ({ user, onLoggedOut, token }) => {
 

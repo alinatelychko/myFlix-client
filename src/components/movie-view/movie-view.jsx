@@ -1,9 +1,20 @@
+
+
 import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
+
+/**
+ * React component for displaying detailed movie information.
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Array} props.movies - An array of movie objects.
+ * @param {Function} props.onFavoriteToggle - Callback function triggered on favorite toggle.
+ * @returns {JSX.Element} The MovieView component.
+ */
 
 export const MovieView = ({ movies, onFavoriteToggle }) => {
   const { movieId } = useParams();

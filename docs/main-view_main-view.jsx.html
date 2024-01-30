@@ -1,4 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view/main-view.jsx</title>
 
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view/main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 
 import React, { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
@@ -125,8 +153,8 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
 
 
   return (
-    <BrowserRouter>
-   <NavigationBar
+    &lt;BrowserRouter>
+   &lt;NavigationBar
         user={user}
         onLoggedOut={() => {
             localStorage.removeItem('token');
@@ -137,92 +165,92 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
         token={token}  // 'token' prop to NavigationBar
       />
 
-      <Row className="justify-content-md-center">
-        <Routes>
-          <Route
+      &lt;Row className="justify-content-md-center">
+        &lt;Routes>
+          &lt;Route
             path="/signup"
             element={
-              <>
+              &lt;>
                 {user ? (
-                  <Navigate to="/" />
+                  &lt;Navigate to="/" />
                 ) : (
-                  <Col md={5}>
-                    <SignupView />
-                  </Col>
+                  &lt;Col md={5}>
+                    &lt;SignupView />
+                  &lt;/Col>
                 )}
-              </>
+              &lt;/>
 
             }
           />
-          <Route
+          &lt;Route
             path="/login"
             element={
-              <>
+              &lt;>
                 {user ? (
-                  <Navigate to="/" />
+                  &lt;Navigate to="/" />
                 ) : (
-                  <Col md={5}>
-                    <LoginView onLoggedIn={(user, token) => {setUser(user);  setToken(token);}} />
-                  </Col>
+                  &lt;Col md={5}>
+                    &lt;LoginView onLoggedIn={(user, token) => {setUser(user);  setToken(token);}} />
+                  &lt;/Col>
                 )}
-              </>
+              &lt;/>
 
             }
           />
-          <Route
+          &lt;Route
             path="/movies/:movieId"
             element={
-              <>
+              &lt;>
                 {!user ? (
-                  <Navigate to="/login" replace />
+                  &lt;Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  &lt;Col>The list is empty!&lt;/Col>
                 ) : (
-                  <Col md={8}>
-                    <MovieView 
+                  &lt;Col md={8}>
+                    &lt;MovieView 
                     movies={movies} 
                     onFavoriteToggle={handleFavoriteToggle}/>
-                  </Col>
+                  &lt;/Col>
                 )}
-              </>
+              &lt;/>
             }
           />
-          <Route
+          &lt;Route
             path="/"
             element={
-              <>
+              &lt;>
 
-                  <Row className="mb-4 mt-2">
-                      <Col ></Col>
-                      <Col ></Col>
-                      <Col>
-                          <Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery); }}>
-                              <Form.Control
+                  &lt;Row className="mb-4 mt-2">
+                      &lt;Col >&lt;/Col>
+                      &lt;Col >&lt;/Col>
+                      &lt;Col>
+                          &lt;Form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearch(searchQuery); }}>
+                              &lt;Form.Control
                                   type="search"
                                   placeholder="Search"
                                   className="me-2"
                                   aria-label="Search"
                                   onChange={(e) => setSearchQuery(e.target.value)}
                               />
-                              <Button type="submit" variant="outline-success">
+                              &lt;Button type="submit" variant="outline-success">
                                   Search
-                              </Button>
-                          </Form>
-                      </Col>
-                  </Row>
+                              &lt;/Button>
+                          &lt;/Form>
+                      &lt;/Col>
+                  &lt;/Row>
                 {!user ? (
-                  <Navigate to="/login" replace />
+                  &lt;Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  &lt;Col>The list is empty!&lt;/Col>
                 ) : (
-                  <>
+                  &lt;>
 
 
 
-<Row>
+&lt;Row>
                     {movies.map((movie) => (
-                     <Col className="mb-4"  key={movie._id} md={3}>
-                     <MovieCard
+                     &lt;Col className="mb-4"  key={movie._id} md={3}>
+                     &lt;MovieCard
 
                                                 movie={movie}
                                                 onFavoriteToggle={
@@ -232,36 +260,58 @@ export const MainView = ({ onUserUpdate, onDeregister})  => {
                                                     favoriteMovies
                                                 }
                                             />
-                   </Col>
+                   &lt;/Col>
                     ))}
-</Row>
-                  </>
+&lt;/Row>
+                  &lt;/>
                 )}
-              </>
+              &lt;/>
             }
           />
-          <Route
+          &lt;Route
           path="/profile"
           element={
-            <ProfileView
+            &lt;ProfileView
               user={user}
               onUserUpdate={handleUserUpdate}
               onDeregister={handleDeregister}
             />
           }
         />
-       <Route
+       &lt;Route
   path="/profile/favorites"
   element={
-    <ProfileFavoritesView
+    &lt;ProfileFavoritesView
       user={user}
       onFavoriteToggle={handleFavoriteToggle}
       token={token} // Make sure to pass the token prop
     />
   }
 />
-      </Routes>
-      </Row>
-    </BrowserRouter>
+      &lt;/Routes>
+      &lt;/Row>
+    &lt;/BrowserRouter>
   );
-};
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#MainView">MainView</a></li><li><a href="global.html#MovieCard">MovieCard</a></li><li><a href="global.html#MovieView">MovieView</a></li><li><a href="global.html#NavigationBar">NavigationBar</a></li><li><a href="global.html#ProfileFavoritesView">ProfileFavoritesView</a></li><li><a href="global.html#ProfileView">ProfileView</a></li><li><a href="global.html#SignupView">SignupView</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jan 30 2024 08:48:22 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

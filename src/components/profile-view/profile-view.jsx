@@ -3,6 +3,20 @@ import { Button, Card } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 
+/**
+ * ProfileView component displays the user's profile information and provides options
+ * to update user details or deregister.
+ *
+ * @component
+ * @param {Object} props - The component's props.
+ * @param {Object} props.user - The user object containing profile information.
+ * @param {string} props.user.Username - The current username.
+ * @param {string} props.user.Email - The current email address.
+ * @param {string} props.user.Birthday - The current date of birth.
+ * @param {Function} props.onUserUpdate - Callback function to update user information.
+ * @param {Function} props.onDeregister - Callback function to deregister the user.
+ * @returns {JSX.Element} - The rendered component.
+ */
 
 export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
   const [newUsername, setNewUsername] = useState(user.Username);

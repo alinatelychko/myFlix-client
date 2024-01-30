@@ -1,0 +1,10 @@
+{
+    "source": {
+      "include": ["./index.jsx", "./src/components/login-view", "./src/components/main-view", "./src/components/movie-card","./src/components/movie-view","./src/components/navigation-bar","./src/components/signup-view","./src/components/profile-favorites-view","./src/components/profile-view"],
+      "exclude": ["./node_modules"]
+    },
+    "opts": {
+      "destination": "./docs"
+    }
+  }
+  

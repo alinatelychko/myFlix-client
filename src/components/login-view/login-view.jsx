@@ -1,6 +1,16 @@
+
+
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+/**
+ * React component for the login view.
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Function} props.onLoggedIn - Callback function triggered on successful login.
+ * @returns {JSX.Element} The LoginView component.
+ */
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");

@@ -1,6 +1,18 @@
+
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+/**
+ * React component for the user profile view.
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.user - The user object.
+ * @param {Function} props.onUserUpdate - Callback function triggered on user update.
+ * @param {Function} props.onDeregister - Callback function triggered on user deregistration.
+ * @returns {JSX.Element} The ProfileView component.
+ */
+
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");

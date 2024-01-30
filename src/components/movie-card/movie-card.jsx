@@ -1,7 +1,19 @@
+
+
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+/**
+ * React component for the movie card.
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.movie - The movie object to display.
+ * @param {Function} props.onFavoriteToggle - Callback function triggered on favorite toggle.
+ * @param {Array} props.favoriteMovies - An array of favorite movie IDs.
+ * @returns {JSX.Element} The MovieCard component.
+ */
 
 export const MovieCard = ({ movie, onFavoriteToggle, favoriteMovies }) => {
   const isFavorite = movie.isFavorite;
