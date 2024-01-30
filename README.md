@@ -25,7 +25,7 @@ MyFlix is a full-stack application built with React, Node.js, Express, and Mongo
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/myflix-app.git
+   git clone https://github.com/alinatelychko/myflix-client.git
    cd myflix-app
 Install dependencies:
 
